@@ -1,8 +1,11 @@
 package com.silverblaze.controller;
 
+import java.io.File;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,21 +29,17 @@ public class SimpleController {
 	}
 
 	@PostMapping("/upload")
-	public String singleFileUpload(@RequestParam("file") MultipartFile file) {
+	public String singleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
 		try {
 			storageService.store(file);
-			simpleController.countWord(storageService.loadAsResource(file.getOriginalFilename()).getFile());
-			System.out.println(file);
+			File fileStoraged = storageService.loadAsResource(file.getOriginalFilename()).getFile();
+			Map<String, Integer> map = simpleController.countWord(fileStoraged);
+			model.addAttribute("map", map);
 			return "words";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "index";
 		}
-	}
-
-	@GetMapping("/uploadStatus")
-	public String uploadStatus() {
-		return "uploadStatus";
 	}
 
 }

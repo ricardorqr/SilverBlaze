@@ -9,8 +9,15 @@
 	<div class="container">
 		<div class="jumbotton" align="center" style="margin-top: 50px;">
 			<h1>Welcome!</h1>
-			<div align="center">
-				<a href="list" class="btn btn_lg btn-primary">Click here to see the complete guest list</a>
+			<div align="left">
+				
+				<form method="POST" enctype="multipart/form-data" action="/upload">
+					<table>
+						<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+						<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+					</table>
+				</form>
+			
 			</div>
 		</div>
 	</div>

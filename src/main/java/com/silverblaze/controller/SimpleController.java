@@ -31,6 +31,10 @@ public class SimpleController {
 	@PostMapping("/upload")
 	public String singleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
 		try {
+			if (file.isEmpty()) {
+				return "index";
+			}
+			
 			storageService.store(file);
 			File fileStoraged = storageService.loadAsResource(file.getOriginalFilename()).getFile();
 			Map<String, Integer> map = simpleController.countWord(fileStoraged);

@@ -7,19 +7,29 @@
 </head>
 <body>
 	<div class="container">
-		<div class="guestList">
-			<table class="tble table-hover">
-				<thead>
-					<tr>
-						<th>Word</th>
-						<th>Occurrences</th>
+		<div class="card">
+			<div class="card-header"><h1>Word Count</h1></div>
+			<div class="card-body">
+				<p class="card-text">The below table shows the occurrences of each word in the selected file.
+					<br/>New line counts as a blank word (" "). </p>
+
+				<a href="/" class="btn btn_lg btn-primary">Try it again</a>
+			</div>
+			<div class="card-body">
+				<table class="table table-sm table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>Word</th>
+							<th>Occurrences</th>
+						</tr>
+					</thead>
+					<tr th:each="map : ${map}">
+						<td><span th:text="${map.key}"></span></td>
+						<td><span th:text="${map.value}"></span></td>
 					</tr>
-				</thead>
-				<tr th:each="map : ${map}">
-					<td><span th:text="${map.key}"></span></td>
-					<td><span th:text="${map.value}"></span></td>
-				</tr>
-			</table>
+				</table>
+				<a href="/" class="btn btn_lg btn-primary">Try it again</a>
+			</div>
 		</div>
 	</div>
 
